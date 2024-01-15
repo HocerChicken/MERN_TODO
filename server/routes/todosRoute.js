@@ -1,29 +1,18 @@
 const express = require("express");
+const todosController = require("../Controller/todosController");
 
 const router = express.Router();
 
 // GET /api/todos
-router.get("/", (req, res) => {
-  res.json({ msg: "Get all todos" });
-});
+router.get("/", todosController.getTodos);
 
 // POST /api/todos
-router.post("/", (req, res) => {
-  res.json({ msg: "create a todo" });
-});
-
-// GET /api/todos/:id
-router.get("/:id", (req, res) => {
-  res.json({ msg: "get a todo" });
-});
+router.post("/", todosController.createTodo);
 
 // UPDATE /api/todos/:id
-router.put("/:id", (req, res) => {
-  res.json({ msg: "update a todo" });
-});
+router.put("/:id", todosController.updateTodo);
 
 // DELETE /api/todos/:id
-router.delete("/:id", (req, res) => {
-  res.json({ msg: "delete a todo" });
-});
+router.delete("/:id", todosController.deleteTodo);
+
 module.exports = router;
