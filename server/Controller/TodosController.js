@@ -1,5 +1,5 @@
-const { trusted, default: mongoose } = require("mongoose");
 const Todos = require("../Models/Todo");
+const mongoose = require("mongoose");
 
 class TodosController {
   getTodos = async (req, res) => {
@@ -25,13 +25,15 @@ class TodosController {
     const { id } = req.params;
     try {
       //check if the id is valid
-      if (!mongoose.Types.isValid(id)) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(404).send(`This is todo with the id of ${id}`);
       }
       const todoID = { _id: id };
-      const update = { complete: true };
-      const updateTodo = await Todos.findOneAndUpdate({ todoID, update });
-      if (!todoID.complete) {
+      const update = { completed: true };
+      const updateTodo = await Todos.findOneAndUpdate(todoID, update, {
+        new: true,
+      });
+      if (!updateTodo) {
         res.status(404).send(`This is todo with the id of ${id}`);
       }
       res.status(201).send(updateTodo);
@@ -44,7 +46,7 @@ class TodosController {
     const { id } = req.params;
     try {
       //check if the id is valid
-      if (!mongoose.Types.isValid(id)) {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(404).send(`This is todo with the id of ${id}`);
       }
       const deleteTodo = await Todos.findOneAndDelete({ _id: id });

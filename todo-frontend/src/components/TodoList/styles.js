@@ -17,4 +17,8 @@ export const Text = styled.span`
   ::first-letter {
     text-transform: capitalize;
   }
+  color: ${(props) => (props.isCompleted ? "red" : null)};
+  text-decoration: ${(props) => (props.isCompleted ? "line-through" : "none")};
 `;
+
+export const DeleteIcon = styled(Text)``;

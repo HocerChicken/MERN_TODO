@@ -16,8 +16,8 @@ export const Input = styled.input`
   background-color: #f0031213;
   border: 1px solid #f0031213;
   border-radius: 15px;
+  outline: none;
   :focus {
-    outline: none;
     border: 3px solid #f0031213;
   }
 `;

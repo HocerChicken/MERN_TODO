@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./styles";
 import Form from "../Form";
+import Key from "../Key";
 import axios from "../.././axios";
 import TodoList from "../TodoList";
+import Author from "../Author";
 
 function Todo() {
   const [input, setInput] = useState("");
@@ -17,7 +19,9 @@ function Todo() {
     }
   };
 
-  useState(() => fetchData(), []);
+  useEffect(() => {
+    fetchData();
+  }, []);
   console.log(input + " input");
   console.dir(todos + " todos");
 
@@ -42,9 +46,11 @@ function Todo() {
       {/* Form components */}
       <Form input={input} setInput={setInput} addTodo={addTodo}></Form>
       {/* TodoList */}
-      <TodoList todos={todos}></TodoList>
+      <TodoList todos={todos} fetchData={fetchData}></TodoList>
       {/* Key */}
+      <Key></Key>
       {/* Author component */}
+      <Author></Author>
     </Container>
   );
 }
